@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Game-Time Leaderboard</title>
+  <title>Game-Time Leaderboard: <%= @team[:team] %></title>
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,700,800,900|Raleway+Dots' rel='stylesheet' type='text/css'>
-  <link href="styles.css" rel="stylesheet" type="text/css">
+  <link href="../../styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <header>
@@ -30,7 +30,51 @@
         </tbody>
       </table>
 
-    <%= @games %>
+      <h2><%= @team[:team] %> Games</h2>
+      <% @games.each do |game| %>
+      <table class="game">
+        <thead>
+          <tr class="headers">
+            <th>Team</th>
+            <th>Final Score</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% if game[:home_team] == @team[:team] %>
+            <tr class="team">
+              <td class="home-name">
+                <strong><a href="<%= game[:home_team] %>"><%= game[:home_team] %></a></strong>
+              </td>
+              <td class="score">
+                <strong><%= game[:home_score] %></strong>
+              </td>
+            </tr>
+            <tr class="team">
+              <td class="away-name">
+                <a href="<%= game[:away_team] %>"><%= game[:away_team] %></a>
+              </td>
+              <td class="score">
+                <%= game[:away_score] %>
+              </td>
+            </tr>
+            <% else %>
+            <tr class="team">
+              <td class="home-name">
+                <a href="<%= game[:home_team] %>"><%= game[:home_team] %></a>
+              </td>
+              <td class="score">
+                <%= game[:home_score] %>
+              </td>
+            </tr>
+            <tr class="team">
+              <td class="away-name"><strong><a href="<%= game[:away_team] %>"><%= game[:away_team] %></a></strong></td>
+              <td class="score"><strong><%= game[:away_score] %></strong></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
   </main>
 </body>
 </html>

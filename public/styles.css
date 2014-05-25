@@ -18,11 +18,18 @@ h1 {
 }
 
 h1 a {
-
   text-transform: uppercase;
   color: #000000;
   text-decoration: none;
   font-size: 20em;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  font-size: 10em;
 }
 
 main {
@@ -56,7 +63,33 @@ td {
   font-weight: 500;
 }
 
-.wins, .losses {
+.wins, .losses, .score {
   text-align: center;
 }
 
+.game {
+  width: 45%;
+  margin: 2.5%;
+  font-size: 2.5em;
+  border: 1px solid black;
+  float: left;
+}
+
+strong {
+  font-weight: 500;
+  font-size: inherit;
+}
+
+a {
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.team-win {
+  color: green;
+}
+
+.team-loss {
+  color: red;
+}

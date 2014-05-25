@@ -24,7 +24,7 @@
         <tbody>
           <% @team_stats.each do |team| %>
           <tr class="team">
-            <td class="team-name"><%= team[:team] %></td>
+            <td class="team-name"><a href="teams/<%= team[:team] %>"><%= team[:team] %></a></td>
             <td class="wins"><%= team[:wins] %></td>
             <td class="losses"><%= team[:losses] %></td>
           </tr>
