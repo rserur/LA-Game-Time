@@ -79,6 +79,17 @@ get '/leaderboard' do
   # then also by losses, lowest to highest.
   @team_stats = @team_stats.sort_by { |team| team[:losses]}
 
+
+  # rank teams
+  rank = 0
+
+  @team_stats.each do |team|
+
+    rank += 1
+    team[:rank] = rank
+
+  end
+
   erb :index
 
 end

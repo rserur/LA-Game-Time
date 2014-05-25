@@ -1,6 +1,8 @@
 * {
   font-size: 62.5%;
   font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -63,7 +65,7 @@ td {
   font-weight: 500;
 }
 
-.wins, .losses, .score {
+.wins, .losses, .score, .rank {
   text-align: center;
 }
 
@@ -92,4 +94,16 @@ a {
 
 .team-loss {
   color: red;
+}
+
+.h-or-a {
+  font-family: 'Raleway Dots', sans-serif;
+}
+
+.team:first-of-type {
+  color: SeaGreen;
+}
+
+.team:last-of-type {
+  color: Crimson;
 }

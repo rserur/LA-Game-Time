@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="team">
+          <tr>
             <td class="team-name"><%= @team[:team] %></td>
             <td class="wins"><%= @team[:wins] %></td>
             <td class="losses"><%= @team[:losses] %></td>
@@ -30,18 +30,24 @@
         </tbody>
       </table>
 
-      <h2><%= @team[:team] %> Games</h2>
+      <hr>
+
+      <h2>Game History</h2>
       <% @games.each do |game| %>
       <table class="game">
         <thead>
           <tr class="headers">
-            <th>Team</th>
+            <th colspan="2">Team</th>
             <th>Final Score</th>
           </tr>
         </thead>
+
         <tbody>
+
             <% if game[:home_team] == @team[:team] %>
-            <tr class="team">
+
+            <tr>
+              <td class="h-or-a">H</td>
               <td class="home-name">
                 <strong><a href="<%= game[:home_team] %>"><%= game[:home_team] %></a></strong>
               </td>
@@ -49,7 +55,8 @@
                 <strong><%= game[:home_score] %></strong>
               </td>
             </tr>
-            <tr class="team">
+            <tr>
+              <td class="h-or-a">A</td>
               <td class="away-name">
                 <a href="<%= game[:away_team] %>"><%= game[:away_team] %></a>
               </td>
@@ -57,8 +64,11 @@
                 <%= game[:away_score] %>
               </td>
             </tr>
+
             <% else %>
-            <tr class="team">
+
+            <tr>
+              <td class="h-or-a">H</td>
               <td class="home-name">
                 <a href="<%= game[:home_team] %>"><%= game[:home_team] %></a>
               </td>
@@ -66,12 +76,16 @@
                 <%= game[:home_score] %>
               </td>
             </tr>
-            <tr class="team">
+            <tr>
+              <td class="h-or-a">A</td>
               <td class="away-name"><strong><a href="<%= game[:away_team] %>"><%= game[:away_team] %></a></strong></td>
               <td class="score"><strong><%= game[:away_score] %></strong></td>
             </tr>
+
             <% end %>
+
         </tbody>
+
       </table>
       <% end %>
 

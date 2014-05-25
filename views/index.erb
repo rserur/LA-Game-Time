@@ -16,6 +16,7 @@
       <table>
         <thead>
           <tr class="headers">
+            <th>Rank</th>
             <th>Team</th>
             <th>Wins</th>
             <th>Losses</th>
@@ -24,6 +25,7 @@
         <tbody>
           <% @team_stats.each do |team| %>
           <tr class="team">
+            <td class="rank"><%= team[:rank] %></td>
             <td class="team-name"><a href="teams/<%= team[:team] %>"><%= team[:team] %></a></td>
             <td class="wins"><%= team[:wins] %></td>
             <td class="losses"><%= team[:losses] %></td>
