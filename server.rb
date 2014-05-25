@@ -83,3 +83,49 @@ get '/leaderboard' do
 
 end
 
+get '/teams/:team_name' do
+
+  @games = load_games
+  @team = {team: params[:team_name]}
+  @team[:wins] = 0
+  @team[:losses] = 0
+
+  @games.each do |game|
+
+      #If a game is found with the team playing at home...
+      if game[:home_team] == @team[:team]
+
+        # and if the home team won, add a win.
+        if game[:home_score].to_i > game[:away_score].to_i
+          @team[:wins] += 1
+
+        # and if the home team lost, add a loss.
+        else
+          @team[:losses] += 1
+        end
+
+      # If a game is found with the team playing away...
+      elsif game[:away_team] == @team[:team]
+
+        # and if the away team won, add a win.
+        if game[:away_score].to_i > game[:home_score].to_i
+          @team[:wins] += 1
+        # and if the home team lost, add a loss.
+        else
+          @team[:losses] += 1
+        end
+
+      end
+
+    # End @games loop.
+  end
+
+  @games = @games.find_all do |game|
+    game[:home_team] == @team[:team] ||
+    game[:away_team] == @team[:team]
+  end
+
+  erb :team
+
+end
+

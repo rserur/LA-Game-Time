@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game-Time Leaderboard</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,700,800,900|Raleway+Dots' rel='stylesheet' type='text/css'>
+  <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <header>
+    <h1><a href="/leaderboard">Game-Time Leaderboard</a></h1>
+  </header>
+
+  <main>
+
+      <table>
+        <thead>
+          <tr class="headers">
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Losses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="team">
+            <td class="team-name"><%= @team[:team] %></td>
+            <td class="wins"><%= @team[:wins] %></td>
+            <td class="losses"><%= @team[:losses] %></td>
+          </tr>
+        </tbody>
+      </table>
+
+    <%= @games %>
+  </main>
+</body>
+</html>
