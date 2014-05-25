@@ -73,6 +73,12 @@ get '/leaderboard' do
   # End @team_stats loop.
   end
 
+  # Sort team_stats by wins, highest to lowest...
+  @team_stats = @team_stats.sort_by { |team| -team[:wins]}
+
+  # then also by losses, lowest to highest.
+  @team_stats = @team_stats.sort_by { |team| team[:losses]}
+
   erb :index
 
 end

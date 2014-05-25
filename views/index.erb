@@ -10,7 +10,13 @@
   </header>
 
   <main>
-      <%= @team_stats %>
+      <% @team_stats.each do |team| %>
+      <li>
+        <span class="team-name"><%= team[:team] %></span>
+        <span class="wins"><%= team[:wins] %></span>
+        <span class="losses"><%= team[:losses] %></span>
+      </li>
+      <% end %>
   </main>
 </body>
 </html>
