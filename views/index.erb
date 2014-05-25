@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Game-Time Leaderboard</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,700,800,900|Raleway+Dots' rel='stylesheet' type='text/css'>
+  <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <header>
@@ -10,13 +12,26 @@
   </header>
 
   <main>
-      <% @team_stats.each do |team| %>
-      <li>
-        <span class="team-name"><%= team[:team] %></span>
-        <span class="wins"><%= team[:wins] %></span>
-        <span class="losses"><%= team[:losses] %></span>
-      </li>
-      <% end %>
+
+      <table>
+        <thead>
+          <tr class="headers">
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Losses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @team_stats.each do |team| %>
+          <tr class="team">
+            <td class="team-name"><%= team[:team] %></td>
+            <td class="wins"><%= team[:wins] %></td>
+            <td class="losses"><%= team[:losses] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
   </main>
 </body>
 </html>

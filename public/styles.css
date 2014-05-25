@@ -1,0 +1,62 @@
+* {
+  font-size: 62.5%;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  margin: 2em;
+}
+
+header {
+  width: 60%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 900;
+}
+
+h1 a {
+
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  font-size: 20em;
+}
+
+main {
+  width: 60%;
+  margin: 1em auto;
+}
+
+table {
+  width: 100%;
+
+}
+
+table, tr, td {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+th {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: 700;
+  padding: .2em;
+}
+
+td {
+  padding: .2em;
+}
+
+.team-name {
+  font-weight: 500;
+}
+
+.wins, .losses {
+  text-align: center;
+}
+
