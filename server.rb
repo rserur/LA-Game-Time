@@ -13,6 +13,12 @@ def load_games
 
 end
 
+get '/' do
+
+  redirect '/leaderboard'
+
+end
+
 get '/leaderboard' do
 
   # Load raw CSV games array.
@@ -80,7 +86,7 @@ get '/leaderboard' do
   @team_stats = @team_stats.sort_by { |team| team[:losses]}
 
 
-  # rank teams
+  # Rank teams.
   rank = 0
 
   @team_stats.each do |team|
@@ -91,6 +97,8 @@ get '/leaderboard' do
   end
 
   erb :index
+
+
 
 end
 
@@ -128,9 +136,10 @@ get '/teams/:team_name' do
 
       end
 
-    # End @games loop.
+  # End @games loop.
   end
 
+  # Find all games the team played.
   @games = @games.find_all do |game|
     game[:home_team] == @team[:team] ||
     game[:away_team] == @team[:team]
