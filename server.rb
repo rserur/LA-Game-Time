@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'csv'
 
-# A method to load CSV into array.
+# :oad CSV into array.
 def load_games
 
   games = []
@@ -16,7 +16,7 @@ def load_games
 
 end
 
-# A method to look through games for specified team's wins and losses.
+# Look through games for specified team's wins and losses.
 def get_stats(games, team)
 
   team[:wins] = 0
