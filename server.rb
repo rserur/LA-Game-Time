@@ -1,27 +1,74 @@
 require 'sinatra'
 require 'csv'
 
+# A method to load CSV into array.
 def load_games
 
   games = []
 
   CSV.foreach('games.csv', headers: true, header_converters: :symbol) do |row|
+
     games << row.to_hash
+
   end
 
   games
 
 end
 
+# A method to look through games for specified team's wins and losses.
+def get_stats(games, team)
+
+  games.each do |game|
+
+    #If a game is found with the team playing at home...
+    if game[:home_team] == team[:team]
+
+      # and if the home team won, add a win.
+      if game[:home_score].to_i > game[:away_score].to_i
+
+        team[:wins] += 1
+
+      # If the home team lost, add a loss.
+      else
+
+        team[:losses] += 1
+
+      end
+
+    # If a game is found with the team playing away...
+    elsif game[:away_team] == team[:team]
+
+      # and if the away team won, add a win.
+      if game[:away_score].to_i > game[:home_score].to_i
+
+        team[:wins] += 1
+
+      # If the home team lost, add a loss.
+      else
+
+        team[:losses] += 1
+
+      end
+
+    end
+
+  # End @games loop.
+  end
+
+end
+
+# Make the leaderboard the index page.
 get '/' do
 
   redirect '/leaderboard'
 
 end
 
+# Generate leaderboard.
 get '/leaderboard' do
 
-  # Load raw CSV games array.
+  # Load games array from CSV.
   @games = load_games
 
   # Create array for hashes of wins and losses by team.
@@ -30,9 +77,11 @@ get '/leaderboard' do
   # Grab all team names from games, whether the name is for
   # a home team or away team.
   @games.each do |game|
+
     # push each as the value of the key ":team"
     @team_stats.push({ team: (game[:home_team]) })
     @team_stats.push({ team: (game[:away_team]) })
+
   end
 
   # Condense to unique team names.
@@ -45,36 +94,8 @@ get '/leaderboard' do
     team[:wins] = 0
     team[:losses] = 0
 
-    # For each team, look through games data.
-    @games.each do |game|
-
-      #If a game is found with the team playing at home...
-      if game[:home_team] == team[:team]
-
-        # and if the home team won, add a win.
-        if game[:home_score].to_i > game[:away_score].to_i
-          team[:wins] += 1
-
-        # and if the home team lost, add a loss.
-        else
-          team[:losses] += 1
-        end
-
-      # If a game is found with the team playing away...
-      elsif game[:away_team] == team[:team]
-
-        # and if the away team won, add a win.
-        if game[:away_score].to_i > game[:home_score].to_i
-          team[:wins] += 1
-        # and if the home team lost, add a loss.
-        else
-          team[:losses] += 1
-        end
-
-      end
-
-    # End @games loop.
-    end
+    # Fill team's hash with wins and losses.
+    get_stats(@games, team)
 
   # End @team_stats loop.
   end
@@ -84,7 +105,6 @@ get '/leaderboard' do
 
   # then also by losses, lowest to highest.
   @team_stats = @team_stats.sort_by { |team| team[:losses]}
-
 
   # Rank teams.
   rank = 0
@@ -98,8 +118,6 @@ get '/leaderboard' do
 
   erb :index
 
-
-
 end
 
 get '/teams/:team_name' do
@@ -109,35 +127,7 @@ get '/teams/:team_name' do
   @team[:wins] = 0
   @team[:losses] = 0
 
-  @games.each do |game|
-
-      #If a game is found with the team playing at home...
-      if game[:home_team] == @team[:team]
-
-        # and if the home team won, add a win.
-        if game[:home_score].to_i > game[:away_score].to_i
-          @team[:wins] += 1
-
-        # and if the home team lost, add a loss.
-        else
-          @team[:losses] += 1
-        end
-
-      # If a game is found with the team playing away...
-      elsif game[:away_team] == @team[:team]
-
-        # and if the away team won, add a win.
-        if game[:away_score].to_i > game[:home_score].to_i
-          @team[:wins] += 1
-        # and if the home team lost, add a loss.
-        else
-          @team[:losses] += 1
-        end
-
-      end
-
-  # End @games loop.
-  end
+  get_stats(@games, @team)
 
   # Find all games the team played.
   @games = @games.find_all do |game|
